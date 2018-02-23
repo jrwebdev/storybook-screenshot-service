@@ -1,6 +1,7 @@
 FROM node:8
 
-ADD ./ ./
+WORKDIR /app
+ADD . /app
 
 RUN 'yarn'
 
