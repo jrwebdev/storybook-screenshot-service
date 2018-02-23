@@ -1,0 +1,17 @@
+{
+  "name": "storybook-screenshot-service",
+  "version": "1.0.0",
+  "description": "Service for generating Storybook screenshots",
+  "repository": "git@github.com:jrwebdev/storybook-screenshot-service.git",
+  "author": "jrwebdev <web@jravenscroft.co.uk>",
+  "license": "MIT",
+  "scripts": {
+    "start": "pm2 start index.js --watch"
+  },
+  "dependencies": {
+    "compression": "^1.7.2",
+    "express": "^4.16.2",
+    "pm2": "^2.10.1",
+    "puppeteer": "^1.1.0"
+  }
+}
