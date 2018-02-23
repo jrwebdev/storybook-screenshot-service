@@ -1,30 +1,36 @@
+console.time('run');
+
 const fs = require('fs-extra');
-const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const request = require('request-promise');
+
+const serviceBaseUrl = 'http://localhost:5555/';
+const storybookBaseUrl =
+  'http://example-storybook.s3-website-ap-southeast-2.amazonaws.com/';
+
+let i = 0;
+const getImageFilename = () => `screenshots/image${i++}.png`;
 
 const run = async () => {
   await mkdirp('screenshots');
 
-  console.time('stories');
   const stories = await request(
-    'http://localhost:5008/stories?url=http://localhost:3333/'
+    `${serviceBaseUrl}stories?url=${storybookBaseUrl}`
   ).then(JSON.parse);
-  console.timeEnd('stories');
 
-  console.time('screenshots');
-  let i = 0;
-  const screenshots = stories.map(
-    s =>
-      request(`http://localhost:5008/screenshot?url=${s}`).then(img =>
-        fs.writeFile(`screenshots/image${i++}.png`, img)
-      )
-    // .pipe(
-    //   fs.createWriteStream(`image${i++}.png`)
-    // )
+  console.log('screenshot count:', stories.length);
+
+  const screenshots = stories.map(s =>
+    request(`${serviceBaseUrl}screenshot?url=${s}`).pipe(
+      fs.createWriteStream(getImageFilename())
+    )
   );
+
   await Promise.all(screenshots);
-  console.timeEnd('screenshots');
 };
 
 run();
+
+process.on('beforeExit', () => {
+  console.timeEnd('run');
+});
