@@ -50,6 +50,7 @@ app.get('/screenshot', async (req, res) => {
 const start = async () => {
   browser = await puppeteer.launch({
     headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
 
   server = app.listen(port, () => {

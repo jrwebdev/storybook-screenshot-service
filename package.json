@@ -6,7 +6,8 @@
   "author": "jrwebdev <web@jravenscroft.co.uk>",
   "license": "MIT",
   "scripts": {
-    "start": "pm2 start ecosystem.config.js"
+    "start": "pm2 start ecosystem.config.js",
+    "start:prod": "node index.js"
   },
   "dependencies": {
     "compression": "^1.7.2",
