@@ -6,12 +6,14 @@
   "author": "jrwebdev <web@jravenscroft.co.uk>",
   "license": "MIT",
   "scripts": {
-    "start": "pm2 start index.js --watch"
+    "start": "pm2 start ecosystem.config.js"
   },
   "dependencies": {
     "compression": "^1.7.2",
     "express": "^4.16.2",
+    "fs-extra": "^5.0.0",
     "pm2": "^2.10.1",
-    "puppeteer": "^1.1.0"
+    "puppeteer": "^1.1.0",
+    "request-promise": "^4.2.2"
   }
 }

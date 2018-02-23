@@ -29,7 +29,6 @@ app.get('/stories', async (req, res) => {
 app.get('/screenshot', async (req, res) => {
   const requestLog = `[GET] /screenshot`;
   console.time(requestLog);
-  console.log(decodeURIComponent(req.query.url));
 
   const page = await browser.newPage();
   await page.goto(decodeURIComponent(req.query.url), {
