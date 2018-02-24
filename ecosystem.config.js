@@ -4,6 +4,8 @@ module.exports = {
       name: 'storybook-screenshot-service',
       script: './index.js',
       watch: 'index.js',
+      instances: 'max',
+      exec_mode: 'cluster',
       env: {
         NODE_ENV: 'development',
       },
