@@ -4,8 +4,7 @@ const fs = require('fs-extra');
 const request = require('request-promise');
 
 const serviceBaseUrl = 'http://localhost:5008/';
-const storybookBaseUrl =
-  'http://example-storybook.s3-website-ap-southeast-2.amazonaws.com/';
+const storybookBaseUrl = 'http://d1yltilqhv515f.cloudfront.net/';
 
 let i = 0;
 const getImageFilename = () => `screenshots/image${i++}.png`;
