@@ -23,6 +23,7 @@ app.get('/stories', async (req, res) => {
   const stories = await page.evaluate(() => window.storybookUrls);
   // TODO: Check for stories
   res.json(stories.map(s => encodeURIComponent(`${url}?${decodeURI(s)}`)));
+  page.close();
 });
 
 app.get('/screenshot', async (req, res) => {
@@ -40,6 +41,7 @@ app.get('/screenshot', async (req, res) => {
     'Content-Length': screenshot.length,
   });
   res.end(screenshot);
+  page.close();
 });
 
 const start = async () => {
