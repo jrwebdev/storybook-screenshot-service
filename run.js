@@ -12,7 +12,7 @@ const getImageFilename = () => `screenshots/image${i++}.png`;
 
 const generateScreenshot = throttle(
   url =>
-    request(`${serviceBaseUrl}screenshot?url=${s}`).pipe(
+    request(`${serviceBaseUrl}screenshot?url=${url}`).pipe(
       fs.createWriteStream(getImageFilename())
     ),
   10
