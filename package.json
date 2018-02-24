@@ -13,6 +13,7 @@
     "compression": "^1.7.2",
     "express": "^4.16.2",
     "fs-extra": "^5.0.0",
+    "morgan": "^1.9.0",
     "pm2": "^2.10.1",
     "puppeteer": "^1.1.0",
     "request-promise": "^4.2.2"

@@ -1,10 +1,12 @@
 const express = require('express');
 const compression = require('compression');
+const morgan = require('morgan');
 
 const port = 5008;
 
 const app = express();
 app.use(compression());
+app.use(morgan('tiny'));
 
 const puppeteer = require('puppeteer');
 
@@ -12,8 +14,6 @@ let browser;
 let server;
 
 app.get('/stories', async (req, res) => {
-  const requestLog = `[GET] /stories`;
-  console.time(requestLog);
   // TODO: Check for url
   const url = `${req.query.url.replace(/\/$/, '')}/iframe.html`;
   const page = await browser.newPage();
@@ -23,13 +23,9 @@ app.get('/stories', async (req, res) => {
   const stories = await page.evaluate(() => window.storybookUrls);
   // TODO: Check for stories
   res.json(stories.map(s => encodeURIComponent(`${url}?${decodeURI(s)}`)));
-  console.timeEnd(requestLog);
 });
 
 app.get('/screenshot', async (req, res) => {
-  const requestLog = `[GET] /screenshot`;
-  console.time(requestLog);
-
   const page = await browser.newPage();
   await page.goto(decodeURIComponent(req.query.url), {
     waitUntil: 'networkidle2',
@@ -44,7 +40,6 @@ app.get('/screenshot', async (req, res) => {
     'Content-Length': screenshot.length,
   });
   res.end(screenshot);
-  console.timeEnd(requestLog);
 });
 
 const start = async () => {
