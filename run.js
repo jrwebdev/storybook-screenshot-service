@@ -2,7 +2,7 @@ console.time('run');
 
 const fs = require('fs-extra');
 const request = require('request-promise');
-const throttle = require('lodash');
+const throttle = require('lodash/throttle');
 
 const serviceBaseUrl = 'http://localhost:5008/';
 const storybookBaseUrl = 'http://d1yltilqhv515f.cloudfront.net/';
